@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>1440000</param-value>
+	</context-param>
+	
+	<servlet>
+	    <servlet-name>spring</servlet-name>
+	    <servlet-class> org.springframework.web.servlet.DispatcherServlet </servlet-class>
+	    <load-on-startup>1</load-on-startup>
+    </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SafeCode</servlet-name>
+    <servlet-class>org.example.shop.util.SafeCode</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SafeCode</servlet-name>
+    <url-pattern>/safecod</url-pattern>
+  </servlet-mapping>
+  
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml </param-value>
+    </context-param>
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+	    
+    <filter>
+    	<filter-name>login</filter-name>
+    	<filter-class>org.example.shop.filter.LoginFilter</filter-class>
+    </filter>
+    <filter>
+    	<filter-name>main</filter-name>
+    	<filter-class>org.example.shop.filter.MainFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+    	<filter-name>login</filter-name>
+    	<url-pattern>/jsp/index.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+    	<filter-name>main</filter-name>
+    	<url-pattern>/jsp/main/*</url-pattern>
+    </filter-mapping>
+</web-app>

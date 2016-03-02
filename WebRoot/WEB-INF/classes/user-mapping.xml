@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.shop.pojo.User">
+	<insert id="add" parameterType="org.example.shop.pojo.User">
+		insert into t_user (id,serial,username,password,status) values(#{id},#{serial},#{username},#{password},#{status})
+	</insert>
+	<select id="find_name" resultType="org.example.shop.pojo.User" parameterType="String">
+		select * from t_user where username = #{username}
+	</select>
+	
+	<select id="find_serial" resultType="org.example.shop.pojo.User" parameterType="String">
+		select * from t_user where serial = #{serial}
+	</select>
+	
+	<select id="find_id" resultType="org.example.shop.pojo.User" parameterType="String">
+		select * from t_user where serial = #{id}
+	</select>
+	
+	<update id="update_status" parameterType="Integer">
+		update t_user set status = #{status} 
+	</update>
+	
+</mapper>
+

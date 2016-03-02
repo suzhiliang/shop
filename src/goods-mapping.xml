@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.shop.pojo.Goods">
+		
+	<insert id="add_good" parameterType="org.example.shop.pojo.Goods" >
+		insert into t_goods (id,serial,name,type,introduce,maker,price,picture) values(#{id},#{serial},#{name},#{type},#{introduce},#{maker},#{price},#{picture})
+	</insert>
+	
+	<select id="find_goodidby_user" parameterType="String" resultType="String">
+		select goodsserial from t_order where userserial = #{serial}
+	</select>
+	
+		<select id="find_goodsby_serial" parameterType="String" resultType="org.example.shop.pojo.Goods">
+		select * from t_goods where serial = #{serial}
+	</select>
+	
+	<select id="find_allgoods" resultType="org.example.shop.pojo.Goods">
+		select * from t_goods 
+	</select>
+	
+	<select id="find_goodsby_type" parameterType="String" resultType="org.example.shop.pojo.Goods">
+		select * from t_goods where type = #{type}
+	</select>
+	
+	<insert id="buy_good" parameterType="org.example.shop.pojo.OrderList" >
+		insert into t_order values(#{userserial},#{goodsserial})
+	</insert>
+	
+	<delete id="delete_goodsby_user" parameterType="org.example.shop.pojo.OrderList">
+		delete from t_order where goodsserial = #{goodsserial}
+	</delete>
+	
+		<select id="validate_goods" parameterType="String" resultType="String">
+		select goodsserial from t_order where goodsserial = #{goodsserial}
+	</select>
+</mapper>
